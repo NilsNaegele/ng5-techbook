@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
+import { TechnologyListService } from './technology-list.service';
 
 @Component({
   selector: 'app-technology-list',
@@ -22,19 +23,21 @@ import { Ingredient } from '../shared/ingredient.model';
   styles: [``]
 })
 export class TechnologyListComponent implements OnInit {
-  ingredients: Ingredient[] = [
-      new Ingredient('JavaScript', 5),
-      new Ingredient('HTML', 10),
-      new Ingredient('CSS', 25)
-  ];
+  ingredients: Array<Ingredient> = [];
 
   onTechnologyAdded(technology: Ingredient) {
-    this.ingredients.push(technology);
+    this.technologyListService.addTechnology(technology);
   }
 
-  constructor() { }
+  constructor(private technologyListService: TechnologyListService) { }
 
   ngOnInit() {
+    this.ingredients = this.technologyListService.getIngredients();
+    this.technologyListService.ingredientsChanged.subscribe(
+      (ingredients: Ingredient[]) => {
+        this.ingredients = ingredients;
+      }
+    );
   }
 
 }

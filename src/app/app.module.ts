@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { PolymerPrincessComponent } from './polymer-princess/polymer-princess.component';
@@ -26,6 +29,27 @@ import { WarningAlertComponent } from './warning-alert/warning-alert.component';
 import { ServerComponent } from './server/server.component';
 import { DefaultComponent } from './default/default.component';
 import { ArticleComponent } from './article/article.component';
+import { HighlightDirective } from './highlight/highlight.directive';
+import { EnhancedHighlightDirective } from './enhanced-highlight.directive';
+import { UnlessDirective } from './unless.directive';
+import { DropdownDirective } from './shared/dropdown.directive';
+import { AccountComponent } from './account/account.component';
+import { NewAccountComponent } from './new-account/new-account.component';
+import { LoggingService } from './logging.service';
+import { ActiveUsersComponent } from './active-users/active-users.component';
+import { InactiveUsersComponent } from './inactive-users/inactive-users.component';
+import { UsersService } from './users.service';
+import { AccountService } from './accounts.service';
+import { TechnologyListService } from './technology-list/technology-list.service';
+import { HomeComponent } from './home/home.component';
+import { UsersComponent } from './users/users.component';
+import { UserComponent } from './users/user/user.component';
+import { EditServerComponent } from './servers/edit-server/edit-server.component';
+import { ServerOneComponent } from './servers/server/server.component';
+import { ServersService } from './servers/servers.service';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+
 
 
 @NgModule({
@@ -51,14 +75,31 @@ import { ArticleComponent } from './article/article.component';
     ServerComponent,
     ServersComponent,
     SuccessAlertComponent,
-    WarningAlertComponent
+    WarningAlertComponent,
+    HighlightDirective,
+    EnhancedHighlightDirective,
+    UnlessDirective,
+    DropdownDirective,
+    AccountComponent,
+    NewAccountComponent,
+    ActiveUsersComponent,
+    InactiveUsersComponent,
+    HomeComponent,
+    UsersComponent,
+    UserComponent,
+    EditServerComponent,
+    ServerOneComponent,
+    RecipeStartComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [AccountService, LoggingService, UsersService, TechnologyListService, ServersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

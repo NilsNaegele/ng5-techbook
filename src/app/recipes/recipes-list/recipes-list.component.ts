@@ -1,40 +1,38 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Recipe } from './../recipe.model';
-
+import { RecipeService } from './../recipes.service';
 
 @Component({
   selector: 'app-recipes-list',
   template: `
         <div class="row">
             <div class="col-xs-12">
-                  <button class="btn btn-success">New Recipe</button>
+                  <button class="btn btn-success" (click)="onNewRecipe()">New Recipe</button>
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-xs-12">
-                  <app-recipe-item *ngFor="let recipe of recipes"
-                  [recipe]="recipe" (selectedRecipe)="onSelected(recipe)"></app-recipe-item>
+                  <app-recipe-item *ngFor="let recipe of recipes; let i = index;"
+                  [recipe]="recipe" [index]="i"></app-recipe-item>
             </div>
         </div>
   `,
   styles: [``]
 })
 export class RecipesListComponent implements OnInit {
-  @Output() selectedRecipe = new EventEmitter<Recipe>();
+  recipes: Recipe[];
 
-  recipes: Recipe[] = [
-    new Recipe('A Test Recipe 123', 'This is the test description', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'),
-    new Recipe('A Test Recipe 456', 'This is the test description', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg')
-  ];
+  constructor(private recipeService: RecipeService,
+              private router: Router, private route: ActivatedRoute) { }
 
-  onSelected(recipe: Recipe) {
-    this.selectedRecipe.emit(recipe);
+  onNewRecipe() {
+      this.router.navigate(['new'], {relativeTo: this.route});
   }
 
-  constructor() { }
-
   ngOnInit() {
+    this.recipes = this.recipeService.getRecipes();
   }
 
 }

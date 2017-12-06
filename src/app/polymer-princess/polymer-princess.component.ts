@@ -19,7 +19,7 @@ export class PolymerPrincessComponent {
   index = 0;
 
   constructor() {
-    this.rotate();
+    // this.rotate();
   }
 
 

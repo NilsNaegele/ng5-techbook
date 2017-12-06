@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
+import { TechnologyListService } from './../technology-list.service';
 
 @Component({
   selector: 'app-technology-edit',
@@ -47,15 +48,16 @@ export class TechnologyEditComponent implements OnInit {
   @ViewChild('nameInput') nameInputRef: ElementRef;
   @ViewChild('amountInput') amountInputRef: ElementRef;
 
-  @Output() technologyAdded = new EventEmitter<Ingredient>();
-
   onAddItem() {
     const ingName = this.nameInputRef.nativeElement.value;
     const ingAmount = this.amountInputRef.nativeElement.value;
-    this.technologyAdded.emit(new Ingredient(ingName, ingAmount));
+    if (ingName === '' || ingAmount === '') { return; }
+    this.technologyListService.addTechnology(new Ingredient(ingName, ingAmount));
+    this.nameInputRef.nativeElement.value = '';
+    this.amountInputRef.nativeElement.value = '';
   }
 
-  constructor() { }
+  constructor(private technologyListService: TechnologyListService) { }
 
   ngOnInit() {
   }
