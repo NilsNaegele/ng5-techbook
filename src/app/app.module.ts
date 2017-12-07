@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -49,7 +49,9 @@ import { ServerOneComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
-
+import { UsersObservableService } from './usersObservable.service';
+import { SimpleFormComponent } from './simple-form/simple-form.component';
+import { SimpleReactiveFormComponent } from './simple-reactive-form/simple-reactive-form.component';
 
 
 @NgModule({
@@ -90,16 +92,20 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
     EditServerComponent,
     ServerOneComponent,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    SimpleFormComponent,
+    SimpleReactiveFormComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     AppRoutingModule
   ],
-  providers: [AccountService, LoggingService, UsersService, TechnologyListService, ServersService],
+  providers: [AccountService, LoggingService, UsersService, TechnologyListService,
+              ServersService, UsersObservableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

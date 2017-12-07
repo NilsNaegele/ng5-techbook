@@ -1,11 +1,11 @@
-import { EventEmitter } from '@angular/core';
 import { Ingredient } from './../shared/ingredient.model';
+import { Subject } from 'rxjs/Subject';
 
 export class TechnologyListService {
-  ingredientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
   private ingredients: Ingredient[] = [
     new Ingredient('JavaScript', 5),
-    new Ingredient('ECMAScript 6', 100),
+    new Ingredient('ES6', 100),
     new Ingredient('HTML', 10),
     new Ingredient('CSS', 25)
   ];
@@ -13,7 +13,7 @@ export class TechnologyListService {
 addTechnology(technology: Ingredient) {
   console.log(technology);
   this.ingredients.push(technology);
-  this.ingredientsChanged.emit(this.ingredients.slice());
+  this.ingredientsChanged.next(this.ingredients.slice());
 }
 
 getIngredients() {
@@ -28,7 +28,7 @@ addTechnologies(technologies: Ingredient[]) {
     }
   }
   this.ingredients.push(...technologies);
-  this.ingredientsChanged.emit(this.ingredients.slice());
+  this.ingredientsChanged.next(this.ingredients.slice());
 }
 
 

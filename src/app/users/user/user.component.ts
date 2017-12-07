@@ -1,36 +1,29 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { UsersObservableService } from './../../usersObservable.service';
 
 @Component({
   selector: 'app-user',
   template: `
-        <p>User with ID {{ user.id }} loaded</p>
-        <p>User with name is {{ user.name }}</p>
-        <hr>
-        <a [routerLink]="['/users', 10, 'Anna']">Load Anna (10)</a>
+        <p>User with <strong>ID {{ id }}</strong> was loaded</p>
+        <button class="btn btn-primary" (click)="onActivate()">Activate</button>
   `,
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit, OnDestroy {
-  user: {id: number, name: string};
-  paramsSubscription: Subscription;
+export class UserComponent implements OnInit  {
+  id: number;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private usersService: UsersObservableService) { }
 
   ngOnInit() {
-    this.user = {
-      id: this.route.snapshot.params['id'],
-      name: this.route.snapshot.params['name']
-    };
-    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      this.user.id = params['id'];
-      this.user.name = params['name'];
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
     });
   }
 
-  ngOnDestroy() {
-      this.paramsSubscription.unsubscribe();
+  onActivate() {
+    this.usersService.usersActivated.next(this.id);
   }
+
 
 }

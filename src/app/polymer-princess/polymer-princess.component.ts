@@ -19,7 +19,7 @@ export class PolymerPrincessComponent {
   index = 0;
 
   constructor() {
-    // this.rotate();
+    this.rotate();
   }
 
 
@@ -27,11 +27,11 @@ export class PolymerPrincessComponent {
       setInterval(() => {
         this.index++;
         this.changeImage(this.index);
-      }, 10000);
+      }, 2000);
   }
 
 changeImage(idx) {
-  if (idx === 6) { idx = 1; this.index = 1; }
+  if (idx === 10) { idx = 1; this.index = 1; }
   this.imgURL = `./assets/carmen${idx}.jpg`;
 }
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { TechnologyListService } from './technology-list.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-technology-list',
@@ -22,8 +23,9 @@ import { TechnologyListService } from './technology-list.service';
   `,
   styles: [``]
 })
-export class TechnologyListComponent implements OnInit {
+export class TechnologyListComponent implements OnInit, OnDestroy {
   ingredients: Array<Ingredient> = [];
+  private ingredientsSubscription: Subscription;
 
   onTechnologyAdded(technology: Ingredient) {
     this.technologyListService.addTechnology(technology);
@@ -33,11 +35,15 @@ export class TechnologyListComponent implements OnInit {
 
   ngOnInit() {
     this.ingredients = this.technologyListService.getIngredients();
-    this.technologyListService.ingredientsChanged.subscribe(
+    this.ingredientsSubscription = this.technologyListService.ingredientsChanged.subscribe(
       (ingredients: Ingredient[]) => {
         this.ingredients = ingredients;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.ingredientsSubscription.unsubscribe();
   }
 
 }
