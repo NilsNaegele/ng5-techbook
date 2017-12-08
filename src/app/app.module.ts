@@ -53,7 +53,11 @@ import { UsersObservableService } from './usersObservable.service';
 import { SimpleFormComponent } from './simple-form/simple-form.component';
 import { SimpleReactiveFormComponent } from './simple-reactive-form/simple-reactive-form.component';
 import { RecipeService } from './recipes/recipes.service';
-
+import { NetworksComponent } from './networks/networks.component';
+import { ShortenPipe } from './shorten.pipe';
+import { FilterPipe } from './filter.pipe';
+import { ReversePipe } from './reverse.pipe';
+import { SortPipe } from './sort.pipe';
 
 @NgModule({
   declarations: [
@@ -95,7 +99,13 @@ import { RecipeService } from './recipes/recipes.service';
     RecipeStartComponent,
     RecipeEditComponent,
     SimpleFormComponent,
-    SimpleReactiveFormComponent
+    SimpleReactiveFormComponent,
+    NetworksComponent,
+    ShortenPipe,
+    FilterPipe,
+    ReversePipe,
+    SortPipe
+
   ],
   imports: [
     BrowserModule,
