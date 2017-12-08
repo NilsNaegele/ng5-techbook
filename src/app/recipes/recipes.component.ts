@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RecipeService } from './recipes.service';
 
 @Component({
   selector: 'app-recipes',
@@ -14,7 +13,6 @@ import { RecipeService } from './recipes.service';
               </div>
           </div>
   `,
-  providers: [RecipeService],
   styles: [``]
 })
 export class RecipesComponent implements OnInit {

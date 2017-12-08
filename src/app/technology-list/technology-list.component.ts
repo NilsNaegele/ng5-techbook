@@ -13,7 +13,8 @@ import { Subscription } from 'rxjs/Subscription';
                   </app-technology-edit>
                   <hr>
                   <ul class="list-group">
-                        <a *ngFor="let ingredient of ingredients"
+                        <a *ngFor="let ingredient of ingredients; let i = index;"
+                            (click)="onEditItem(i)"
                             class="list-group-item" style="cursor: pointer">
                             {{ ingredient.name }} ({{ ingredient.amount }})
                         </a>
@@ -32,6 +33,10 @@ export class TechnologyListComponent implements OnInit, OnDestroy {
   }
 
   constructor(private technologyListService: TechnologyListService) { }
+
+  onEditItem(index: number) {
+      this.technologyListService.startedEditing.next(index);
+  }
 
   ngOnInit() {
     this.ingredients = this.technologyListService.getIngredients();

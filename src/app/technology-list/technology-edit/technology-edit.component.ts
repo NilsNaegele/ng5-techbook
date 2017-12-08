@@ -1,13 +1,16 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { TechnologyListService } from './../technology-list.service';
+
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-technology-edit',
   template: `
             <div class="row">
                 <div class="col-xs-12">
-                    <form>
+                    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                         <div class="row">
                               <div class="col-sm-5 form-group">
                                     <label for="name">Name</label>
@@ -15,7 +18,10 @@ import { TechnologyListService } from './../technology-list.service';
                                       type="text"
                                       id="name"
                                       class="form-control"
-                                      #nameInput>
+                                      name="name"
+                                      ngModel
+                                      required
+                                      >
                               </div>
                               <div class="col-sm-2 form-group">
                                     <label for="amount">Amount</label>
@@ -23,19 +29,28 @@ import { TechnologyListService } from './../technology-list.service';
                                       type="number"
                                       id="amount"
                                       class="form-control"
-                                      #amountInput>
+                                      name="amount"
+                                      ngModel
+                                      required
+                                      pattern="^[1-9]+[0-9]*$">
                               </div>
                         </div>
                         <div class="row">
                                 <div class="col-xs-12">
                                       <button
                                         class="btn btn-success"
-                                        type="submit"
-                                        (click)="onAddItem()">
-                                        Add
+                                        [disabled]="!f.valid"
+                                        type="submit">
+                                        {{ editMode ? 'Update' : 'Add' }}
                                         </button>
-                                      <button class="btn btn-danger" type="button">Delete</button>
-                                      <button class="btn btn-primary" type="button">Clear</button>
+                                      <button
+                                      (click)="onDelete()"
+                                      *ngIf="editMode"
+                                      class="btn btn-danger"
+                                      type="button">
+                                      Delete
+                                      </button>
+                                      <button (click)="onClear()" class="btn btn-primary" type="button">Clear</button>
                                 </div>
                         </div>
                     </form>
@@ -44,22 +59,57 @@ import { TechnologyListService } from './../technology-list.service';
   `,
   styles: [``]
 })
-export class TechnologyEditComponent implements OnInit {
-  @ViewChild('nameInput') nameInputRef: ElementRef;
-  @ViewChild('amountInput') amountInputRef: ElementRef;
+export class TechnologyEditComponent implements OnInit, OnDestroy {
+  @ViewChild('f') technologyListForm: NgForm;
+  editingSubscription: Subscription;
+  editMode = false;
+  editedItemIndex: number;
+  editedItem: Ingredient;
 
-  onAddItem() {
-    const ingName = this.nameInputRef.nativeElement.value;
-    const ingAmount = this.amountInputRef.nativeElement.value;
-    if (ingName === '' || ingAmount === '') { return; }
-    this.technologyListService.addTechnology(new Ingredient(ingName, ingAmount));
-    this.nameInputRef.nativeElement.value = '';
-    this.amountInputRef.nativeElement.value = '';
+  onSubmit(form: NgForm) {
+    const value = form.value;
+    console.log(value);
+    if (value.name === '' || value.amount === null) { return; }
+    const newIngredient = new Ingredient(value.name, value.amount);
+    if (this.editMode) {
+      this.technologyListService.updateIngredient(this.editedItemIndex, newIngredient);
+    } else {
+      this.technologyListService.addTechnology(newIngredient);
+    }
+    this.editMode = false;
+    form.reset();
   }
 
   constructor(private technologyListService: TechnologyListService) { }
 
   ngOnInit() {
+   this.editingSubscription =
+   this.technologyListService.startedEditing.subscribe(
+     (index: number) => {
+        this.editedItemIndex = index;
+        this.editMode = true;
+        this.editedItem = this.technologyListService.getIngredient(index);
+        this.technologyListForm.setValue({
+          name: this.editedItem.name,
+          amount: this.editedItem.amount
+        });
+     }
+   );
+  }
+
+  onClear() {
+    this.technologyListForm.reset();
+    this.editMode = false;
+  }
+
+  onDelete() {
+      this.technologyListService.deleteIngredient(this.editedItemIndex);
+      this.onClear();
+
+  }
+
+  ngOnDestroy() {
+    this.editingSubscription.unsubscribe();
   }
 
 }

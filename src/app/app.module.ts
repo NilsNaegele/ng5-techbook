@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
 import { RecipesDetailComponent } from './recipes/recipes-detail/recipes-detail.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-item.component';
 import { TechnologyListComponent } from './technology-list/technology-list.component';
 import { TechnologyEditComponent } from './technology-list/technology-edit/technology-edit.component';
@@ -48,10 +49,10 @@ import { EditServerComponent } from './servers/edit-server/edit-server.component
 import { ServerOneComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { UsersObservableService } from './usersObservable.service';
 import { SimpleFormComponent } from './simple-form/simple-form.component';
 import { SimpleReactiveFormComponent } from './simple-reactive-form/simple-reactive-form.component';
+import { RecipeService } from './recipes/recipes.service';
 
 
 @NgModule({
@@ -105,7 +106,7 @@ import { SimpleReactiveFormComponent } from './simple-reactive-form/simple-react
     AppRoutingModule
   ],
   providers: [AccountService, LoggingService, UsersService, TechnologyListService,
-              ServersService, UsersObservableService],
+              ServersService, UsersObservableService, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

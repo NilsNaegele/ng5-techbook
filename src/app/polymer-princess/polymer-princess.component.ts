@@ -10,12 +10,13 @@ import { Component } from '@angular/core';
         img {
           border-radius: 100%;
           width: 500px;
+          height: 400px;
         }
   `]
 })
 export class PolymerPrincessComponent {
-  imgURL = './assets/carmen1.jpg';
-  carmen = 'My Polymer Princess';
+  imgURL = './assets/book1.png';
+  carmen = 'My Angular Books';
   index = 0;
 
   constructor() {
@@ -32,7 +33,7 @@ export class PolymerPrincessComponent {
 
 changeImage(idx) {
   if (idx === 10) { idx = 1; this.index = 1; }
-  this.imgURL = `./assets/carmen${idx}.jpg`;
+  this.imgURL = `./assets/book${idx}.png`;
 }
 
 }
