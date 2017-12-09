@@ -54,6 +54,11 @@ export class RecipeService {
 
   constructor(private technologyListService: TechnologyListService) { }
 
+  setReceipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
   getRecipes() {
     return this.recipes.slice();
   }

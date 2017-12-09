@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { Response } from '@angular/http';
+import { DataStorageService } from './../shared/data-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -26,8 +27,8 @@ import { Component } from '@angular/core';
                                 Manage <span class="caret"></span>
                                 </a>
                                         <ul class="dropdown-menu">
-                                            <li><a style="cursor: pointer;">Save Data</a></li>
-                                            <li><a style="cursor: pointer;">Fetch Data</a></li>
+                                            <li><a (click)="onSaveData()" style="cursor: pointer;">Save Data</a></li>
+                                            <li><a (click)="onFetchData()" style="cursor: pointer;">Fetch Data</a></li>
                                         </ul>
                                   </li>
                             </ul>
@@ -57,5 +58,17 @@ import { Component } from '@angular/core';
   `]
 })
 export class HeaderComponent {
+
+  constructor(private dataStorageService: DataStorageService) { }
+
+
+  onSaveData() {
+    this.dataStorageService.storeRecipes().subscribe(
+      (response: Response) => { console.log(response); });
+  }
+
+  onFetchData() {
+    this.dataStorageService.getRecipes();
+  }
 
 }

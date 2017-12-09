@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -58,6 +59,9 @@ import { ShortenPipe } from './shorten.pipe';
 import { FilterPipe } from './filter.pipe';
 import { ReversePipe } from './reverse.pipe';
 import { SortPipe } from './sort.pipe';
+import { HttpComponent } from './http/http.component';
+import { ServerService } from './server.service';
+import { DataStorageService } from './shared/data-storage.service';
 
 @NgModule({
   declarations: [
@@ -104,19 +108,22 @@ import { SortPipe } from './sort.pipe';
     ShortenPipe,
     FilterPipe,
     ReversePipe,
-    SortPipe
+    SortPipe,
+    HttpComponent
 
   ],
   imports: [
     BrowserModule,
     CommonModule,
+    HttpModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule
   ],
   providers: [AccountService, LoggingService, UsersService, TechnologyListService,
-              ServersService, UsersObservableService, RecipeService],
+              ServersService, UsersObservableService, RecipeService, ServerService,
+              DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
