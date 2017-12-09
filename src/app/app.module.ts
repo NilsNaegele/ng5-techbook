@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-
+import { ParticlesModule } from 'angular-particle';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -62,6 +62,9 @@ import { SortPipe } from './sort.pipe';
 import { HttpComponent } from './http/http.component';
 import { ServerService } from './server.service';
 import { DataStorageService } from './shared/data-storage.service';
+import { ImagesComponent } from './images/images.component';
+import { CityListComponent, WeatherComponent } from './city-list/city-list.component';
+import { WeatherService } from './shared/weather.service';
 
 @NgModule({
   declarations: [
@@ -109,7 +112,10 @@ import { DataStorageService } from './shared/data-storage.service';
     FilterPipe,
     ReversePipe,
     SortPipe,
-    HttpComponent
+    HttpComponent,
+    ImagesComponent,
+    CityListComponent,
+    WeatherComponent
 
   ],
   imports: [
@@ -119,11 +125,12 @@ import { DataStorageService } from './shared/data-storage.service';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ParticlesModule
   ],
   providers: [AccountService, LoggingService, UsersService, TechnologyListService,
               ServersService, UsersObservableService, RecipeService, ServerService,
-              DataStorageService],
+              DataStorageService, WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

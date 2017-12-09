@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
         <router-outlet></router-outlet>
       </div>
       <div class="col-md-4" style="float: right;">
-        <app-polymer-princess></app-polymer-princess>
+        <app-polymer-princess [type]="'book'"></app-polymer-princess>
       </div>
     </div>
   </div>

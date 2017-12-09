@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-polymer-princess',
   template: `
-          <img [src]="imgURL">
-          <i>{{carmen}}</i>
+          <img [src]="imgURL"><br>
+          <i>{{quote}}</i>
   `,
   styles: [`
         img {
@@ -14,12 +14,23 @@ import { Component } from '@angular/core';
         }
   `]
 })
-export class PolymerPrincessComponent {
-  imgURL = './assets/book1.png';
-  carmen = 'My Angular Books';
+export class PolymerPrincessComponent implements OnInit {
+  @Input() type: string;
+  imgURL = '';
+  quote = '';
   index = 0;
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() {
+    if (this.type === 'book') {
+      this.imgURL = './assets/book1.png';
+      this.quote = 'My Angular Books';
+    } else {
+      this.imgURL = './assets/images/technology1.jpg';
+      this.quote = 'My Technologies';
+    }
+
     this.rotate();
   }
 
@@ -33,7 +44,11 @@ export class PolymerPrincessComponent {
 
 changeImage(idx) {
   if (idx === 10) { idx = 1; this.index = 1; }
+  if (this.type === 'book') {
   this.imgURL = `./assets/book${idx}.png`;
+  } else {
+    this.imgURL = `./assets/images/technology${idx}.jpg`;
+  }
 }
 
 }

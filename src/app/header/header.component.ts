@@ -20,6 +20,14 @@ import { DataStorageService } from './../shared/data-storage.service';
                                <li routerLinkActive="active">
                                   <a routerLink="/technology-list">Technology List</a>
                                </li>
+                               <li routerLinkActive="active">
+                                  <a routerLink="/images">Images</a>
+                               </li>
+                               <li routerLinkActive="active">
+                               <a routerLink="/weather">World Weather
+                                <i class="wi wi-day-sunny"></i>
+                               </a>
+                            </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown" appDropdown>
