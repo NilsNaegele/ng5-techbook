@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
+import * as firebase from 'firebase/app';
+
+import { AuthService } from '../chat/auth.service';
 import { DataStorageService } from './../shared/data-storage.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +32,19 @@ import { DataStorageService } from './../shared/data-storage.service';
                                <a routerLink="/weather">World Weather
                                 <i class="wi wi-day-sunny"></i>
                                </a>
-                            </li>
+                              </li>
+                              <li routerLinkActive="active">
+                                  <a *ngIf="!(user | async)?.uid" routerLink="/login">Login</a>
+                              </li>
+                              <li routerLinkActive="active">
+                                  <a *ngIf="!(user | async)?.uid" routerLink="/signup">Sign Up</a>
+                              </li>
+                              <li routerLinkActive="active">
+                                <a id="userEmail" *ngIf="(user | async)?.uid">Hi {{ userEmail }}</a>
+                              </li>
+                              <li routerLinkActive="active">
+                                <a *ngIf="(user | async)?.uid" (click)="logout()">Logout</a>
+                              </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown" appDropdown>
@@ -65,10 +82,12 @@ import { DataStorageService } from './../shared/data-storage.service';
   }
   `]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  user: Observable<firebase.User>;
+  userEmail: string;
 
-  constructor(private dataStorageService: DataStorageService) { }
-
+  constructor(private authService: AuthService, private router: Router,
+              private dataStorageService: DataStorageService) { }
 
   onSaveData() {
     this.dataStorageService.storeRecipes().subscribe(
@@ -77,6 +96,20 @@ export class HeaderComponent {
 
   onFetchData() {
     this.dataStorageService.getRecipes();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/images']);
+  }
+
+  ngOnInit() {
+    this.user = this.authService.authUser();
+    this.user.subscribe(user => {
+      if (user) {
+        this.userEmail = user.email;
+      }
+    });
   }
 
 }

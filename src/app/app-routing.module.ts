@@ -9,6 +9,9 @@ import { UserComponent } from './users/user/user.component';
 import { HomeComponent } from './home/home.component';
 import { ImagesComponent } from './images/images.component';
 import { WeatherComponent, CityListComponent } from './city-list/city-list.component';
+import { ChatRoomComponent } from './chat/chat-room/chat-room.component';
+import { LoginFormComponent } from './chat/login-form/login-form.component';
+import { SignupFormComponent } from './chat/signup-form/signup-form.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -21,8 +24,10 @@ const appRoutes: Routes = [
   { path: 'technology-list', component: TechnologyListComponent },
   { path: 'images', component: ImagesComponent },
   { path: 'weather', component: CityListComponent },
-  { path: 'weather/:woeId', component: WeatherComponent }
-
+  { path: 'weather/:woeId', component: WeatherComponent },
+  { path: 'signup', component: SignupFormComponent },
+  { path: 'login', component: LoginFormComponent },
+  { path: 'chat', component: ChatRoomComponent }
 ];
 
 @NgModule({

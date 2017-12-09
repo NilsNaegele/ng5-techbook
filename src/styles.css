@@ -17,3 +17,21 @@ body {
   color: #fff;
   background-color: #ff9999;
 }
+
+
+app-chatroom {
+  display: flex;
+  flex-direction: column;
+}
+
+app-chat-form {
+  width: 100%;
+  display: flex;
+  white-space: nowrap;
+  overflow: none;
+}
+
+.message {
+  display: block;
+  height: auto;
+}

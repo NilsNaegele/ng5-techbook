@@ -1,0 +1,5 @@
+.background{
+  overflow:hidden;
+  background: linear-gradient(45deg, rgba(241, 2, 181, 0.808), rgba(150, 47, 0, 0.9));
+  color: #fff;
+}

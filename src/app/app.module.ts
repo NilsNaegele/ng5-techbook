@@ -1,9 +1,18 @@
+import { AuthService } from './chat/auth.service';
+import { ChatService } from './chat/chat.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { environment } from '../environments/environment';
+
 import { RouterModule, Routes } from '@angular/router';
 import { ParticlesModule } from 'angular-particle';
 import { AppRoutingModule } from './app-routing.module';
@@ -65,6 +74,15 @@ import { DataStorageService } from './shared/data-storage.service';
 import { ImagesComponent } from './images/images.component';
 import { CityListComponent, WeatherComponent } from './city-list/city-list.component';
 import { WeatherService } from './shared/weather.service';
+import { ChatFormComponent } from './chat/chat-form/chat-form.component';
+import { ChatRoomComponent } from './chat/chat-room/chat-room.component';
+import { FeedComponent } from './chat/feed/feed.component';
+import { MessageComponent } from './chat/message/message.component';
+import { LoginFormComponent } from './chat/login-form/login-form.component';
+import { SignupFormComponent } from './chat/signup-form/signup-form.component';
+import { NavbarComponent } from './chat/navbar/navbar.component';
+import { UserListComponent } from './chat/user-list/user-list.component';
+import { UserItemComponent } from './chat/user-item/user-item.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +133,16 @@ import { WeatherService } from './shared/weather.service';
     HttpComponent,
     ImagesComponent,
     CityListComponent,
-    WeatherComponent
+    WeatherComponent,
+    ChatFormComponent,
+    ChatRoomComponent,
+    FeedComponent,
+    MessageComponent,
+    LoginFormComponent,
+    SignupFormComponent,
+    NavbarComponent,
+    UserListComponent,
+    UserItemComponent
 
   ],
   imports: [
@@ -126,11 +153,15 @@ import { WeatherService } from './shared/weather.service';
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    ParticlesModule
+    ParticlesModule,
+    AngularFireModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [AccountService, LoggingService, UsersService, TechnologyListService,
               ServersService, UsersObservableService, RecipeService, ServerService,
-              DataStorageService, WeatherService],
+              DataStorageService, WeatherService, ChatService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
