@@ -1,3 +1,5 @@
+import { FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { ChatService } from './../chat.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-
-  constructor() { }
+  users: FirebaseListObservable<any[]>;
+  constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+  this.users = this.chatService.getUsers();
   }
 
 }

@@ -17,7 +17,6 @@ export class ChatService {
             this.afAuth.authState.subscribe(auth => {
                     if (auth !== undefined && auth !== null) {
                       this.user = auth;
-                      console.log('AUTH: ' + auth);
                     }
 
                     this.getUser().subscribe(a => {
@@ -47,7 +46,6 @@ export class ChatService {
        userName: this.userName,
        email: email
      });
-    console.log('Send Message called');
    }
 
    getMessages(): FirebaseListObservable<ChatMessage[]> {
@@ -61,7 +59,7 @@ export class ChatService {
 
    getTimeStamp(): string {
      const now = new Date();
-     const date = now.getUTCFullYear() + '/' + (now.getUTCMonth() + 1) + '/' + now.getUTCDate();
+     const date = `${now.getUTCDate()}/${(now.getUTCMonth() + 1)}/${now.getUTCFullYear()}`;
      const time = `${now.getUTCHours()}:${now.getUTCMinutes()}:${now.getUTCSeconds()}`;
     return (`${date} ${time}`);
    }
