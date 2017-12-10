@@ -1,0 +1,116 @@
+<ng-progress></ng-progress>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit(account.value)">
+      <div class="form-group">
+      <h3>Twitter User:</h3>
+        <div class="input-group">
+        <span class="input-group-addon" id="btnGroupAddon">@</span>
+        <input type="text"
+              class="form-control"
+              id="twitterAddress"
+              placeholder="Enter Twitter Handle"
+              required
+              #account>
+        </div>
+        <button type="submit" class="btn btn-danger">Analyze!</button>
+      </div>
+    </form>
+  </div>
+  </div>
+</div>
+<hr>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+          <div class="list-group">
+            <div class="list-group-item">
+                <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit('nilsnagele')">
+                  <h3>Nils Nägele: @nilsnagele</h3>
+                    <button type="submit" class="btn btn-primary">Analyze this account</button>
+                </form>
+            </div>
+         </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="list-group">
+              <div class="list-group-item">
+                  <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit('CarmenPopoviciu')">
+                    <h3>Carmen Popoviciu: @CarmenPopoviciu</h3>
+                      <button type="submit" class="btn btn-primary">Analyze this account</button>
+                  </form>
+              </div>
+           </div>
+          </div>
+          <div class="col-sm-3">
+              <div class="list-group">
+                <div class="list-group-item">
+                    <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit('angular')">
+                      <h3>Angular angular.io: @angular</h3>
+                        <button type="submit" class="btn btn-primary">Analyze this account</button>
+                    </form>
+                </div>
+             </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="list-group">
+                  <div class="list-group-item">
+                      <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit('IgorMinar')">
+                        <h3>Igor Minar: @IgorMinar</h3>
+                          <button type="submit" class="btn btn-primary">Analyze this account</button>
+                      </form>
+                  </div>
+               </div>
+            </div>
+    </div>
+</div>
+<hr>
+
+<div class="container">
+    <div *ngIf="chartVisible" class="row">
+      <div class="col-md-8">
+          <div>
+              <canvas baseChart
+                      [chartType]="'bar'"
+                      [datasets]="chartData"
+                      [labels]="chartLabels"
+                      [options]="chartOptions"
+                      [legend]="true"
+                      (chartClick)="onChartClick($event)">
+              </canvas>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <canvas baseChart
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [chartType]="doughnutChartType">
+          </canvas>
+      </div>
+      <div class="row">
+
+        <table class="table table-sm" *ngIf="data">
+          <thead class="thead-dark">
+            <tr>
+              <th>Date</th>
+              <th>Tweet</th>
+              <th>Positive Words</th>
+              <th>Negative Words</th>
+              <th>Sentiment</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let tweet of data">
+            <th scope="row">{{ tweet.date | amDateFormat:'LL' }}</th>
+            <td>{{ tweet.message }}</td>
+            <td><span class="btn btn-success" *ngFor="let positive of tweet.sentiment.positive">{{ positive }}</span></td>
+            <td><span class="btn btn-danger" *ngFor="let negative of tweet.sentiment.negative">{{ negative }}</span></td>
+            <td>{{ tweet.sentiment.comparative }}</td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+

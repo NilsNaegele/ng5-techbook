@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   <app-header></app-header>
   <div class="container">
    <div class="row">
-      <div class="col-md-8" style="width: 750px !important;">
+      <div [class]="colWidth" [style]="width">
         <router-outlet></router-outlet>
       </div>
-      <div class="col-md-4" style="float: right;">
+      <div *ngIf="!hideInitialContainer" class="col-md-4" style="float: right;">
         <app-polymer-princess [type]="'book'"></app-polymer-princess>
       </div>
     </div>
@@ -19,18 +20,27 @@ import { Component, OnInit } from '@angular/core';
   styles: [``]
 })
 export class AppComponent implements OnInit {
-      selectedFeature = 'recipe';
-      onNavigate(feature) {
-        this.selectedFeature = feature;
-      }
-
-      constructor() {
-       }
+      hideInitialContainer = false;
+      colWidth = 'col-md-8';
+      width = 'width: 750px !important;';
+      constructor(private router: Router) {}
 
       ngOnInit() {
+        this.router.events.subscribe(event => {
+          if (event instanceof NavigationStart) {
+          if (event.url === '/sentiments' || event.url === '/tweets') {
+                this.hideInitialContainer = true;
+                this.colWidth = 'col-md-12';
+                this.width = 'width: 100%;';
+           } else {
+             this.hideInitialContainer = false;
+             this.colWidth = 'col-md-8';
+             this.width = 'width: 750px !important;';
 
+           }
+          }
+        });
       }
-
 }
 
 

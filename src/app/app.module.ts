@@ -1,5 +1,3 @@
-import { AuthService } from './chat/auth.service';
-import { ChatService } from './chat/chat.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,6 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { ChartsModule } from 'ng2-charts';
+import { MomentModule } from 'angular2-moment';
+import { NgProgressModule } from 'ngx-progressbar';
 
 import { environment } from '../environments/environment';
 
@@ -83,6 +85,12 @@ import { SignupFormComponent } from './chat/signup-form/signup-form.component';
 import { NavbarComponent } from './chat/navbar/navbar.component';
 import { UserListComponent } from './chat/user-list/user-list.component';
 import { UserItemComponent } from './chat/user-item/user-item.component';
+import { InfoComponent } from './tweets/info/info.component';
+import { ResultComponent } from './tweets/result/result.component';
+import { AnalysisTweetsComponent } from './tweets/analysis-tweets/analysis-tweets.component';
+import { TweetHttpService } from './tweets/tweet-http.service';
+import { AuthService } from './chat/auth.service';
+import { ChatService } from './chat/chat.service';
 
 @NgModule({
   declarations: [
@@ -142,7 +150,10 @@ import { UserItemComponent } from './chat/user-item/user-item.component';
     SignupFormComponent,
     NavbarComponent,
     UserListComponent,
-    UserItemComponent
+    UserItemComponent,
+    InfoComponent,
+    ResultComponent,
+    AnalysisTweetsComponent
 
   ],
   imports: [
@@ -154,6 +165,9 @@ import { UserItemComponent } from './chat/user-item/user-item.component';
     FormsModule,
     AppRoutingModule,
     ParticlesModule,
+    ChartsModule,
+    MomentModule,
+    NgProgressModule,
     AngularFireModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -161,7 +175,7 @@ import { UserItemComponent } from './chat/user-item/user-item.component';
   ],
   providers: [AccountService, LoggingService, UsersService, TechnologyListService,
               ServersService, UsersObservableService, RecipeService, ServerService,
-              DataStorageService, WeatherService, ChatService, AuthService],
+              DataStorageService, WeatherService, ChatService, AuthService, TweetHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

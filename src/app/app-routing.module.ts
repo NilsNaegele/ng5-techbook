@@ -1,3 +1,4 @@
+import { InfoComponent } from './tweets/info/info.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TechnologyListComponent } from './technology-list/technology-list.component';
@@ -12,6 +13,7 @@ import { WeatherComponent, CityListComponent } from './city-list/city-list.compo
 import { ChatRoomComponent } from './chat/chat-room/chat-room.component';
 import { LoginFormComponent } from './chat/login-form/login-form.component';
 import { SignupFormComponent } from './chat/signup-form/signup-form.component';
+import { AnalysisTweetsComponent } from './tweets/analysis-tweets/analysis-tweets.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -27,7 +29,10 @@ const appRoutes: Routes = [
   { path: 'weather/:woeId', component: WeatherComponent },
   { path: 'signup', component: SignupFormComponent },
   { path: 'login', component: LoginFormComponent },
-  { path: 'chat', component: ChatRoomComponent }
+  { path: 'chat', component: ChatRoomComponent },
+  { path: 'sentiments', component: InfoComponent },
+  { path: 'tweets', component: AnalysisTweetsComponent },
+  { path: '**', component: ImagesComponent }
 ];
 
 @NgModule({
