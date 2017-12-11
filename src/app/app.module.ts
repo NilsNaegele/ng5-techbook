@@ -91,6 +91,11 @@ import { AnalysisTweetsComponent } from './tweets/analysis-tweets/analysis-tweet
 import { TweetHttpService } from './tweets/tweet-http.service';
 import { AuthService } from './chat/auth.service';
 import { ChatService } from './chat/chat.service';
+import { YoutubeSearchComponent } from './youtube/youtube-search/youtube-search.component';
+import { YoutubeSearchResultComponent } from './youtube/youtube-search-result/youtube-search-result.component';
+import { YouTubeSearchService } from './youtube/youtube-search.service';
+import { YouTubeSearchBoxComponent } from './youtube/youtube-search-box/youtube-search-box.component';
+import { youTubeSearchInjectables } from './youtube/youtube-search-injectables';
 
 @NgModule({
   declarations: [
@@ -153,7 +158,10 @@ import { ChatService } from './chat/chat.service';
     UserItemComponent,
     InfoComponent,
     ResultComponent,
-    AnalysisTweetsComponent
+    AnalysisTweetsComponent,
+    YoutubeSearchComponent,
+    YoutubeSearchResultComponent,
+    YouTubeSearchBoxComponent
 
   ],
   imports: [
@@ -175,7 +183,8 @@ import { ChatService } from './chat/chat.service';
   ],
   providers: [AccountService, LoggingService, UsersService, TechnologyListService,
               ServersService, UsersObservableService, RecipeService, ServerService,
-              DataStorageService, WeatherService, ChatService, AuthService, TweetHttpService],
+              DataStorageService, WeatherService, ChatService, AuthService,
+              TweetHttpService, youTubeSearchInjectables],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

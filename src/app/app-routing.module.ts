@@ -1,4 +1,3 @@
-import { InfoComponent } from './tweets/info/info.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TechnologyListComponent } from './technology-list/technology-list.component';
@@ -14,6 +13,8 @@ import { ChatRoomComponent } from './chat/chat-room/chat-room.component';
 import { LoginFormComponent } from './chat/login-form/login-form.component';
 import { SignupFormComponent } from './chat/signup-form/signup-form.component';
 import { AnalysisTweetsComponent } from './tweets/analysis-tweets/analysis-tweets.component';
+import { YoutubeSearchComponent } from './youtube/youtube-search/youtube-search.component';
+import { InfoComponent } from './tweets/info/info.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'chat', component: ChatRoomComponent },
   { path: 'sentiments', component: InfoComponent },
   { path: 'tweets', component: AnalysisTweetsComponent },
+  { path: 'youtube', component: YoutubeSearchComponent },
   { path: '**', component: ImagesComponent }
 ];
 

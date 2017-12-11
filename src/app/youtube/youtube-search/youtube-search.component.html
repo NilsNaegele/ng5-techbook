@@ -1,0 +1,10 @@
+<app-youtube-search-box (loading)="loading = $event"
+(results)="updateResults($event)"></app-youtube-search-box>
+
+<p *ngIf="loading">Loading, might take a few 100 milliseconds ...</p>
+<div class="container">
+  <div class="row">
+    <app-youtube-search-result *ngFor="let result of results" [result]="result">
+    </app-youtube-search-result>
+  </div>
+</div>

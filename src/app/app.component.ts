@@ -28,7 +28,8 @@ export class AppComponent implements OnInit {
       ngOnInit() {
         this.router.events.subscribe(event => {
           if (event instanceof NavigationStart) {
-          if (event.url === '/sentiments' || event.url === '/tweets') {
+          if (event.url === '/sentiments' || event.url === '/tweets'
+                                          || event.url === '/youtube') {
                 this.hideInitialContainer = true;
                 this.colWidth = 'col-md-12';
                 this.width = 'width: 100%;';

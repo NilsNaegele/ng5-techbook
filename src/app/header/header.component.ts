@@ -48,6 +48,9 @@ import { Observable } from 'rxjs/Observable';
                               <li routerLinkActive="active">
                                   <a routerLink="/sentiments">Sentiments</a>
                               </li>
+                              <li routerLinkActive="active">
+                                  <a routerLink="/youtube">Youtube</a>
+                              </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown" appDropdown>
