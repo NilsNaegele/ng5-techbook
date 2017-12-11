@@ -96,6 +96,11 @@ import { YoutubeSearchResultComponent } from './youtube/youtube-search-result/yo
 import { YouTubeSearchService } from './youtube/youtube-search.service';
 import { YouTubeSearchBoxComponent } from './youtube/youtube-search-box/youtube-search-box.component';
 import { youTubeSearchInjectables } from './youtube/youtube-search-injectables';
+import { TrackContainerComponent } from './soundcloud/track-container/track-container.component';
+import { TrackListComponent } from './soundcloud/track-list/track-list.component';
+import { TrackButtonComponent } from './soundcloud/track-button/track-button.component';
+import { TrackSearchComponent } from './soundcloud/track-search/track-search.component';
+import { SoundCloudService } from './soundcloud/soundcloud.service';
 
 @NgModule({
   declarations: [
@@ -161,8 +166,11 @@ import { youTubeSearchInjectables } from './youtube/youtube-search-injectables';
     AnalysisTweetsComponent,
     YoutubeSearchComponent,
     YoutubeSearchResultComponent,
-    YouTubeSearchBoxComponent
-
+    YouTubeSearchBoxComponent,
+    TrackContainerComponent,
+    TrackListComponent,
+    TrackButtonComponent,
+    TrackSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -184,7 +192,7 @@ import { youTubeSearchInjectables } from './youtube/youtube-search-injectables';
   providers: [AccountService, LoggingService, UsersService, TechnologyListService,
               ServersService, UsersObservableService, RecipeService, ServerService,
               DataStorageService, WeatherService, ChatService, AuthService,
-              TweetHttpService, youTubeSearchInjectables],
+              TweetHttpService, youTubeSearchInjectables, SoundCloudService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,23 @@
+<div class="container" *ngIf="tracks && tracks.length > 0">
+  <br>
+  <div class="col-md-12">
+    <span *ngIf="(search && search.length > 2)">Results for "{{ search }}"</span>
+  </div>
+  <br>
+      <div class="row">
+          <div class="col-md-6" *ngFor="let track of tracks">
+              <div class="media">
+                  <div class="media-body">
+                    <app-track-button
+                    [trackId]="track.id"
+                    [isPlaying]="pause(track.id)"
+                    [trackArtworkUrl]="track.artwork_url"
+                    (click)="setCurrentTrack(track.id)">
+                    </app-track-button>
+                    <b>{{ track.title }}</b>
+                    <span *ngIf="track.genre"><small>[{{ track.genre }}]</small></span>
+                  </div>
+                </div>
+          </div>
+      </div>
+</div>

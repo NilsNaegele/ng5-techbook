@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
         this.router.events.subscribe(event => {
           if (event instanceof NavigationStart) {
           if (event.url === '/sentiments' || event.url === '/tweets'
-                                          || event.url === '/youtube') {
+              || event.url === '/youtube' || event.url === '/soundcloud') {
                 this.hideInitialContainer = true;
                 this.colWidth = 'col-md-12';
                 this.width = 'width: 100%;';

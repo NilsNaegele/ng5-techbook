@@ -1,0 +1,9 @@
+<div class="input-group input-group-lg">
+  <input type="text" class="form-control" #search (keyup)="searchTrack($event.target.value)"
+  placeholder="Search for Music ..." aria-describedby="music-addon2">
+  <span class="input-group-addon" id="music-addon1"
+      (click)="searchTrack(search.value)">Go!
+      <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+  </span>
+</div>
+

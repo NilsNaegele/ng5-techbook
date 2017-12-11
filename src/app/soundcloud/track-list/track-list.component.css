@@ -1,0 +1,9 @@
+
+.track-item:hover {
+  background-color: #e8e8e8;
+}
+
+.img-hover:hover {
+  opacity: 0.4;
+  text-align: center;
+}

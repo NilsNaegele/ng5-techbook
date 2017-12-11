@@ -7,5 +7,6 @@ export const environment = {
     projectId: 'ng5-techbook',
     storageBucket: 'ng5-techbook.appspot.com',
     messagingSenderId: '417532687249'
-  }
+  },
+  soundcloud_client_id: '937b8ee9740391be6be8a8415884a41a'
 };

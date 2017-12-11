@@ -15,6 +15,7 @@ import { SignupFormComponent } from './chat/signup-form/signup-form.component';
 import { AnalysisTweetsComponent } from './tweets/analysis-tweets/analysis-tweets.component';
 import { YoutubeSearchComponent } from './youtube/youtube-search/youtube-search.component';
 import { InfoComponent } from './tweets/info/info.component';
+import { TrackContainerComponent } from './soundcloud/track-container/track-container.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
   { path: 'sentiments', component: InfoComponent },
   { path: 'tweets', component: AnalysisTweetsComponent },
   { path: 'youtube', component: YoutubeSearchComponent },
+  { path: 'soundcloud', component: TrackContainerComponent },
   { path: '**', component: ImagesComponent }
 ];
 
